@@ -38,33 +38,43 @@ local Window = Rayfield:CreateWindow({
 
 local Tab = Window:CreateTab("Main", 4483362458) -- Title, Image
 
-local Toggle = Tab:CreateToggle({
+-- Auto Click Toggle (1 klik untuk mulai, terus berjalan)
+local AutoToggle = Tab:CreateToggle({
     Name = "Auto Click",
     CurrentValue = false,
     Flag = "AutoClick",
     Callback = function(Value)
         if Value then
-            -- Toggle aktif → mulai auto click
             _G.AutoClick = true
             spawn(function()
                 while _G.AutoClick do
-                    -- Ganti bagian ini sesuai target klik game
-                    -- Misal klik RemoteEvent untuk makan, collect, dsb.
                     local success, err = pcall(function()
-                        -- Contoh klik function:
-                        -- game:GetService("ReplicatedStorage").Shared.ClickEvent:FireServer()
+                        local remoteFolder = game:GetService("ReplicatedStorage")["e060f5cc-4fdb-4423-8ab6-a3048d2f5efd"]
+                        remoteFolder.Events['']:FireServer(true,true,false) -- Auto click loop
                     end)
-                    if not success then
-                        warn("Auto click error: "..err)
-                    end
-                    wait(0.05) -- kecepatan klik (20 klik per detik)
+                    if not success then warn("Auto Click Error: "..err) end
+                    wait(0.05) -- kecepatan klik
                 end
             end)
         else
-            -- Toggle mati → hentikan auto click
             _G.AutoClick = false
         end
     end,
 })
 
-
+-- Manual Click Button (klik 5x setiap tekan tombol)
+local ManualButton = Tab:CreateButton({
+    Name = "Manual Click 5x",
+    Callback = function()
+        spawn(function()
+            for i = 1, 5 do
+                local success, err = pcall(function()
+                    local remoteFolder = game:GetService("ReplicatedStorage")["e060f5cc-4fdb-4423-8ab6-a3048d2f5efd"]
+                    remoteFolder.Events['']:FireServer(true,false) -- Manual click
+                end)
+                if not success then warn("Manual Click Error: "..err) end
+                wait(0.05) -- delay antar klik, bisa diubah
+            end
+        end)
+    end
+})
