@@ -15,7 +15,7 @@ local TeleportTab = Window:Tab({
     Locked = false,
 })
 
-local ZoomTab = Window:Tab({
+local CameraTab = Window:Tab({
     Title = "Zoom",
     Icon = "navigation",
     Locked = false,
@@ -66,9 +66,9 @@ end
 local player = game.Players.LocalPlayer
 local camera = workspace.CurrentCamera
 
--- Variabel kamera
-local camDistance = 20
-local camHeight = 5
+-- Variabel Zoom
+local zoomDistance = 20
+local zoomHeight = 5
 
 -- Update kamera setiap frame
 game:GetService("RunService").RenderStepped:Connect(function()
@@ -76,30 +76,28 @@ game:GetService("RunService").RenderStepped:Connect(function()
     if char and char:FindFirstChild("HumanoidRootPart") then
         local hrp = char.HumanoidRootPart
         camera.CameraType = Enum.CameraType.Scriptable
-        -- kamera mundur di belakang karakter
-        local offset = CFrame.new(0, camHeight, camDistance)
-        camera.CFrame = hrp.CFrame * offset
+        camera.CFrame = hrp.CFrame * CFrame.new(0, zoomHeight, zoomDistance)
     end
 end)
 
 -- Slider Zoom
-local Slider = ZoomTab:Slider({
-    Title = "Camera Zoom",
-    Desc = "Atur jarak pandang kamera",
+CameraTab:Slider({
+    Title = "Zoom Distance",
+    Desc = "Atur seberapa jauh kamera dari karakter",
     Step = 1,
-    Value = {Min = 10, Max = 1000, Default = 20}, -- bisa sangat jauh
+    Value = {Min = 5, Max = 500, Default = 20}, -- Bisa sangat jauh
     Callback = function(value)
-        camDistance = value
+        zoomDistance = value
     end
 })
 
--- Slider untuk tinggi kamera (optional)
-local HeightSlider = ZoomTab:Slider({
+-- Slider tinggi kamera (opsional)
+CameraTab:Slider({
     Title = "Camera Height",
     Desc = "Tinggi kamera dari karakter",
     Step = 1,
     Value = {Min = 0, Max = 200, Default = 5},
     Callback = function(value)
-        camHeight = value
+        zoomHeight = value
     end
 })
