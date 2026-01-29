@@ -22,15 +22,15 @@ local CamTab = Window:Tab({
 })
 -- Daftar koordinat teleport
 local teleportPoints = {
-    {Name = "TP 1", CFrame = CFrame.new(206.39, -2.82, 24.40)},
-    {Name = "TP 2", CFrame = CFrame.new(747.84, 0.54, -51.73)},
-    {Name = "TP 3", CFrame = CFrame.new(402.01, -2.82, 14.84)},
-    {Name = "TP 4", CFrame = CFrame.new(547.18, -2.82, 16.71)},
-    {Name = "TP 5", CFrame = CFrame.new(758.57, -5.47, 15.28)},
-    {Name = "TP 6", CFrame = CFrame.new(1082.57, -2.82, 5.47)},
-    {Name = "TP 7", CFrame = CFrame.new(1553.39, -2.82, -14.61)},
-    {Name = "TP 8", CFrame = CFrame.new(2276.71, -2.82, -14.40)},
-    {Name = "TP 9", CFrame = CFrame.new(2602.92, -2.82, -2.50)},
+    {Name = "TP 1", CFrame = CFrame.new(200.00, -2.77, 0.00)},
+    {Name = "TP 2", CFrame = CFrame.new(284.00, -2.77, 0.00)},
+    {Name = "TP 3", CFrame = CFrame.new(398.00, -2.77, 0.00)},
+    {Name = "TP 4", CFrame = CFrame.new(542.00, -2.77, 0.00)},
+    {Name = "TP 5", CFrame = CFrame.new(757.58, -2.77, -0.48)},
+    {Name = "TP 6", CFrame = CFrame.new(1083.59, -2.77, 3.12))},
+    {Name = "TP 7", CFrame = CFrame.new(1571.49, -2.77, 3.48)},
+    {Name = "TP 8", CFrame = CFrame.new(2273.91, -2.77, 3.83)},
+    {Name = "TP 9", CFrame = CFrame.new(2632.31, -2.77, 2.30)},
 }
 
 -- Fungsi untuk ambil HumanoidRootPart, termasuk setelah respawn
