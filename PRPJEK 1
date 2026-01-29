@@ -62,68 +62,27 @@ for _, tp in ipairs(teleportPoints) do
         end
     })
 end
-
 local player = game.Players.LocalPlayer
-local camera = workspace.CurrentCamera
 
--- Variabel kamera
-local zoomDistance = 20
-local zoomHeight = 5
-local minZoom = 5
-local maxZoom = 500
+-- Default dan Max Zoom
+local DefaultZoom = 128
+local MaxZoom = 5000
 
--- Detect pinch gesture
-local uis = game:GetService("UserInputService")
-local touches = {}
+-- Section Zoom Toggle
+CamTab:Label({Title = "Zoom Toggle"})
 
-uis.TouchStarted:Connect(function(input)
-    if input.UserInputType == Enum.UserInputType.Touch then
-        touches[input.UserInputState] = input.Position
-    end
-end)
-
-uis.TouchMoved:Connect(function(input)
-    if input.UserInputType == Enum.UserInputType.Touch then
-        touches[input.UserInputState] = input.Position
-        local touchList = {}
-        for k,v in pairs(touches) do table.insert(touchList, v) end
-        if #touchList == 2 then
-            local p1, p2 = touchList[1], touchList[2]
-            local currentDist = (p1 - p2).Magnitude
-            if not touches.prevDist then touches.prevDist = currentDist end
-            local delta = currentDist - touches.prevDist
-            zoomDistance = math.clamp(zoomDistance - delta*0.1, minZoom, maxZoom)
-            touches.prevDist = currentDist
-        end
-    end
-end)
-
-uis.TouchEnded:Connect(function(input)
-    if input.UserInputType == Enum.UserInputType.Touch then
-        touches[input.UserInputState] = nil
-        if next(touches) == nil then
-            touches.prevDist = nil
-        end
-    end
-end)
-
--- Update kamera setiap frame
-game:GetService("RunService").RenderStepped:Connect(function()
-    local char = player.Character
-    if char and char:FindFirstChild("HumanoidRootPart") then
-        local hrp = char.HumanoidRootPart
-        camera.CameraType = Enum.CameraType.Scriptable
-        camera.CFrame = hrp.CFrame * CFrame.new(0, zoomHeight, zoomDistance)
-    end
-end)
-
--- Slider opsional untuk tinggi kamera
-CameraTab:Slider({
-    Title = "Camera Height",
-    Desc = "Tinggi kamera dari karakter",
-    Step = 1,
-    Value = {Min = 0, Max = 200, Default = 5},
+-- Toggle Zoom Jauh
+CamTab:Toggle({
+    Title = "Zoom Jauh",
+    Desc = "Aktifkan untuk Zoom sangat jauh",
+    Locked = false,
     Callback = function(value)
-        zoomHeight = value
+        if value then
+            player.CameraMaxZoomDistance = MaxZoom
+            player.CameraMinZoomDistance = 0
+        else
+            player.CameraMaxZoomDistance = DefaultZoom
+            player.CameraMinZoomDistance = 0
+        end
     end
 })
