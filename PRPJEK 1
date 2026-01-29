@@ -38,43 +38,63 @@ local Window = Rayfield:CreateWindow({
 
 local Tab = Window:CreateTab("Main", 4483362458) -- Title, Image
 
--- Auto Click Toggle (1 klik untuk mulai, terus berjalan)
-local AutoToggle = Tab:CreateToggle({
-    Name = "Auto Click",
+-- === Menu Auto Clicker ===
+
+-- Auto Click Toggle (loop otomatis)
+local AutoClickToggle = Tab:CreateToggle({
+    Name = "Auto Click (Loop)",
     CurrentValue = false,
-    Flag = "AutoClick",
+    Flag = "AutoClickLoop",
     Callback = function(Value)
+        _G.AutoClickLoop = Value
         if Value then
-            _G.AutoClick = true
             spawn(function()
-                while _G.AutoClick do
+                while _G.AutoClickLoop do
                     local success, err = pcall(function()
-                        local remoteFolder = game:GetService("ReplicatedStorage")["e060f5cc-4fdb-4423-8ab6-a3048d2f5efd"]
-                        remoteFolder.Events['']:FireServer(true,true,false) -- Auto click loop
+                        local remoteFolder = game:GetService("ReplicatedStorage")["f3b27cfa-9232-4c6f-bbeb-ebd78438fcab"]
+                        remoteFolder.Events["ClickEvent"]:FireServer(true,true,false) -- Auto click
                     end)
                     if not success then warn("Auto Click Error: "..err) end
                     wait(0.05) -- kecepatan klik
                 end
             end)
-        else
-            _G.AutoClick = false
         end
     end,
 })
 
--- Manual Click Button (klik 5x setiap tekan tombol)
+-- Manual Click Loop Toggle (klik 5x terus menerus jika toggle ON)
+local ManualLoopToggle = Tab:CreateToggle({
+    Name = "Manual Click 5x (Loop)",
+    CurrentValue = false,
+    Flag = "ManualClickLoop",
+    Callback = function(Value)
+        _G.ManualClickLoop = Value
+        if Value then
+            spawn(function()
+                while _G.ManualClickLoop do
+                    for i = 1, 5 do
+                        local success, err = pcall(function()
+                            local remoteFolder = game:GetService("ReplicatedStorage")["f3b27cfa-9232-4c6f-bbeb-ebd78438fcab"]
+                            remoteFolder.Events["ClickEvent"]:FireServer(true,false) -- Manual click
+                        end)
+                        if not success then warn("Manual Click Error: "..err) end
+                        wait(0.05)
+                    end
+                    wait(0.1) -- delay antar loop
+                end
+            end)
+        end
+    end,
+})
+
+-- Manual Click 1x Button
 local ManualButton = Tab:CreateButton({
-    Name = "Manual Click 5x",
+    Name = "Manual Click 1x",
     Callback = function()
-        spawn(function()
-            for i = 1, 5 do
-                local success, err = pcall(function()
-                    local remoteFolder = game:GetService("ReplicatedStorage")["e060f5cc-4fdb-4423-8ab6-a3048d2f5efd"]
-                    remoteFolder.Events['']:FireServer(true,false) -- Manual click
-                end)
-                if not success then warn("Manual Click Error: "..err) end
-                wait(0.05) -- delay antar klik, bisa diubah
-            end
+        local success, err = pcall(function()
+            local remoteFolder = game:GetService("ReplicatedStorage")["f3b27cfa-9232-4c6f-bbeb-ebd78438fcab"]
+            remoteFolder.Events["ClickEvent"]:FireServer(true,false)
         end)
+        if not success then warn("Manual Click Error: "..err) end
     end
 })
