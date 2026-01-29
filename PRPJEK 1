@@ -3,7 +3,7 @@ local WindUI = loadstring(game:HttpGet("https://github.com/Footagesus/WindUI/rel
 
 -- Buat Window
 local Window = WindUI:CreateWindow({
-    Title = "My Super Hub",
+    Title = "Zyqrin Hub",
     Icon = "door-open",
     Author = "by .ftgs and .ftgs",
 })
@@ -63,55 +63,19 @@ for _, tp in ipairs(teleportPoints) do
     })
 end
 
-local player = game.Players.LocalPlayer
 local camera = workspace.CurrentCamera
 
--- Variabel kamera
-local zoomDistance = 20
-local zoomHeight = 5
-local camRotation = 0 -- rotasi horizontal
-
--- Update kamera setiap frame
-game:GetService("RunService").RenderStepped:Connect(function()
-    local char = player.Character
-    if char and char:FindFirstChild("HumanoidRootPart") then
-        local hrp = char.HumanoidRootPart
-        camera.CameraType = Enum.CameraType.Scriptable
-        -- posisi mundur + rotasi horizontal
-        local offset = CFrame.Angles(0, math.rad(camRotation), 0) * CFrame.new(0, zoomHeight, zoomDistance)
-        camera.CFrame = hrp.CFrame * offset
-    end
-end)
-
--- Slider untuk jarak Zoom
-CameraTab:Slider({
-    Title = "Zoom Distance",
-    Desc = "Atur seberapa jauh kamera dari karakter",
-    Step = 1,
-    Value = {Min = 5, Max = 2000, Default = 20},
+-- Slider FOV untuk Zoom
+local Slider = CameraTab:Slider({
+    Title = "Camera Zoom (FOV)",
+    Desc = "Atur seberapa luas / jauh kamera",
+    Step = 1, -- langkah 1
+    Value = {
+        Min = 70,    -- FOV paling sempit / normal
+        Max = 400,   -- FOV paling lebar / jauh banget
+        Default = 70, -- default
+    },
     Callback = function(value)
-        zoomDistance = value
-    end
-})
-
--- Slider untuk tinggi kamera
-CameraTab:Slider({
-    Title = "Camera Height",
-    Desc = "Tinggi kamera dari karakter",
-    Step = 1,
-    Value = {Min = 0, Max = 500, Default = 5},
-    Callback = function(value)
-        zoomHeight = value
-    end
-})
-
--- Slider untuk rotasi horizontal
-CameraTab:Slider({
-    Title = "Camera Rotate",
-    Desc = "Putar kamera ke samping",
-    Step = 1,
-    Value = {Min = -180, Max = 180, Default = 0},
-    Callback = function(value)
-        camRotation = value
+        camera.FieldOfView = value
     end
 })
