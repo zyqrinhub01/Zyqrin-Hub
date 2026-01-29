@@ -68,7 +68,7 @@ local player = game.Players.LocalPlayer
 local camera = workspace.CurrentCamera
 
 -- Slider Zoom
-local Slider = Tab:Slider({
+local Slider = ZoomTab:Slider({
     Title = "Camera Zoom",
     Desc = "Atur jarak pandang kamera",
     
