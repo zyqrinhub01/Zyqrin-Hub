@@ -23,40 +23,23 @@ local InfoTab = Window:Tab({
     Icon = "bird", -- optional
     Locked = false,
 })
+local discordInvite = "https://discord.gg/INVITE_KAMU"
 
-local discordInvite = "https://discord.gg/INVITEKAMU"
+local Paragraph = InfoTab:Paragraph({
+    Title = "Paragraph with Image, Thumbnail, Buttons",
+    Desc = "Script ini memiliki fitur:
+• Auto Farm
+• Auto Collect
+• Auto Buy
+• Auto Rejoin
 
-InfoTab:Section({
-    Title = "📢 UPDATE & INFORMASI"
-})
+Catatan:
+- Jangan pakai di akun utama
+- Jika error, rejoin server
+- Update otomatis tanpa ganti link
 
-InfoTab:Paragraph({
-    Title = "Script Information",
-    Desc = [[
-🔔 UPDATE TERBARU v1.3.2
-• Auto detect base (8 base)
-• Auto detect plot player
-• Fix auto collect tidak jalan
-• Optimasi performa (lebih ringan)
-• Support update tanpa ganti link
-
-📌 CARA PAKAI
-1. Execute script
-2. Pilih fitur yang diinginkan
-3. Jika error → rejoin server
-
-⚠️ PERINGATAN
-• Jangan spam tombol
-• Gunakan 1 exploit saja
-• Risiko ditanggung user
-
-💬 SUPPORT
-Join Discord untuk:
-• Update script
-• Report bug
-• Reset HWID
-• Info fitur baru
-    ]],
+Discord:
+discord.gg/INVITEKAMU",
     Color = "Red",
     Buttons = {
         {
@@ -68,12 +51,11 @@ Join Discord untuk:
                 end
 
                 game:GetService("StarterGui"):SetCore("SendNotification", {
-                    Title = "DISCORD",
+                    Title = "Discord",
                     Text = "Link Discord disalin ke clipboard!",
                     Duration = 5
                 })
-            end
+            end,
         }
     }
 })
-
