@@ -1,0 +1,52 @@
+
+local WindUI = loadstring(game:HttpGet("https://github.com/Footagesus/WindUI/releases/latest/download/main.lua"))()
+local Window = WindUI:CreateWindow({
+    Title = "My Super Hub",
+    Icon = "door-open", -- lucide icon. optional
+    Author = "by .ftgs and .ftgs", -- optional
+})
+
+local Window = WindUI:CreateWindow({
+    -- ...
+    
+    KeySystem = {                                                   
+        Note = "Example Key System. With pandadevelopment.",        
+        API = {                                                     
+            { -- pandadevelopment
+                Type = "pandadevelopment", -- type
+                ServiceId = "zyqrin", -- service id
+            },                                                      
+        },                                                          
+    },                                                              
+})
+
+local InfoTab = Window:Tab({
+    Title = "Tab Title",
+    Icon = "lucide:info", -- optional
+    Locked = false,
+})
+
+local discordInvite = "https://discord.gg/INVITE_KAMU"
+
+local Paragraph = InfoTab:Paragraph({
+    Title = "ZYQRIN DISCORD",
+    Desc = "Join Discord untuk info & update script",
+    Color = "Blue",
+    Buttons = {
+        {
+            Icon = "lucide:copy",
+            Title = "Join Discord",
+            Callback = function()
+                if setclipboard then
+                    setclipboard(discordInvite)
+                end
+
+                game:GetService("StarterGui"):SetCore("SendNotification", {
+                    Title = "Discord",
+                    Text = "Link Discord disalin ke clipboard!",
+                    Duration = 5
+                })
+            end,
+        }
+    }
+})
