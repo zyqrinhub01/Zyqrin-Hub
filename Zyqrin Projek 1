@@ -24,11 +24,39 @@ local InfoTab = Window:Tab({
     Locked = false,
 })
 
-local discordInvite = "https://discord.gg/INVITE_KAMU"
+local discordInvite = "https://discord.gg/INVITEKAMU"
 
-local Paragraph = InfoTab:Paragraph({
-    Title = "Paragraph with Image, Thumbnail, Buttons",
-    Desc = "Join Discord untuk info & update script",
+InfoTab:Section({
+    Title = "📢 UPDATE & INFORMASI"
+})
+
+InfoTab:Paragraph({
+    Title = "Script Information",
+    Desc = [[
+🔔 UPDATE TERBARU v1.3.2
+• Auto detect base (8 base)
+• Auto detect plot player
+• Fix auto collect tidak jalan
+• Optimasi performa (lebih ringan)
+• Support update tanpa ganti link
+
+📌 CARA PAKAI
+1. Execute script
+2. Pilih fitur yang diinginkan
+3. Jika error → rejoin server
+
+⚠️ PERINGATAN
+• Jangan spam tombol
+• Gunakan 1 exploit saja
+• Risiko ditanggung user
+
+💬 SUPPORT
+Join Discord untuk:
+• Update script
+• Report bug
+• Reset HWID
+• Info fitur baru
+    ]],
     Color = "Red",
     Buttons = {
         {
@@ -40,11 +68,12 @@ local Paragraph = InfoTab:Paragraph({
                 end
 
                 game:GetService("StarterGui"):SetCore("SendNotification", {
-                    Title = "Discord",
+                    Title = "DISCORD",
                     Text = "Link Discord disalin ke clipboard!",
                     Duration = 5
                 })
-            end,
+            end
         }
     }
 })
+
