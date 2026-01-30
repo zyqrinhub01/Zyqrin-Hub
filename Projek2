@@ -45,7 +45,7 @@ _G.AutoHit = true
 --Functions
 function AutoHit()
  while _G.AutoHit == true do
- game:GetService("ReplicatedStorage").Paper.Remotes.__remoteevent:FireServer("Mine")
+ game:GetService("ReplicatedStorage").Paper.Remotes.__remoteevent:FireServer("Basic Chest")
 wait(.000000000000000000000000000000000000000000000000001)
 
     end
