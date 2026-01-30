@@ -4,17 +4,6 @@ local Window = WindUI:CreateWindow({
     Title = "My Super Hub",
     Icon = "door-open", -- lucide icon. optional
     Author = "by .ftgs and .ftgs", -- optional
-    
-    KeySystem = {                                                   
-        Note = "Example Key System. With pandadevelopment.",        
-        API = {                                                     
-            { -- pandadevelopment
-                Type = "pandadevelopment", -- type
-                ServiceId = "zyqrin", -- service id
-            },                                                      
-        },                                                          
-    },                                                              
-})
 
 local InfoTab = Window:Tab({
     Title = "Tab Title",
@@ -46,3 +35,43 @@ local Paragraph = InfoTab:Paragraph({
         }
     }
 })
+
+-- Buat Tab Camera
+local Tab = Window:Tab({
+    Title = "Camera",
+    Icon = "camera",
+})
+
+-- Buat Section Zoom Toggle
+local Section = Tab:Section({
+    Title = "Zoom Toggle"
+})
+
+-- Default dan Max Zoom
+local player = game.Players.LocalPlayer
+local DefaultZoom = 128
+local MaxZoom = 5000
+
+-- Toggle Zoom Jauh
+local Toggle = Section:Toggle({
+    Title = "Zoom Jauh",
+    Desc = "Aktifkan untuk Zoom sangat jauh",
+    Icon = "bird",
+    Type = "Checkbox",
+    Value = false, -- default value
+    Callback = function(state)
+        if state then
+            player.CameraMaxZoomDistance = MaxZoom
+            player.CameraMinZoomDistance = 0
+            player.CameraMode = Enum.CameraType.Custom -- pastikan Custom
+        else
+            player.CameraMaxZoomDistance = DefaultZoom
+            player.CameraMinZoomDistance = 0
+            player.CameraMode = Enum.CameraType.Custom
+        end
+        print("Zoom Toggle Activated: " .. tostring(state))
+    end
+})
+
+-- Contoh update judul Section
+Section:SetTitle("Zoom Jauh Toggle")
