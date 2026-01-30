@@ -41,11 +41,14 @@ local Window = Rayfield:CreateWindow({
 
 --Values
 _G.AutoHit = true
+_G.AutoMpMine = "Mine","MP"
 
 --Functions
 function AutoHit()
  while _G.AutoHit == true do
- game:GetService("ReplicatedStorage").Paper.Remotes.__remoteevent:FireServer("Mine","MP",)
+ game:GetService("ReplicatedStorage").Paper.Remotes.__remoteevent:FireServer(_G.AutoMpMine)
+wait(.000000000000000000000000000000000000000000000000001)
+
     end
 end
 
@@ -62,3 +65,14 @@ local Toggle = FarmTab:CreateToggle({
    end,
 })
 
+local Dropdown = FarmTab:CreateDropdown({
+   Name = "Dropdown Example",
+   Options = {"Train","Mine"},
+   CurrentOption = {"Train"},
+   MultipleOptions = false,
+   Flag = "Dropdown1", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+   Callback = function(Options)
+    _G.AutoMpMine = Value
+    print(_G.AutoMpMine)
+   end,
+})
