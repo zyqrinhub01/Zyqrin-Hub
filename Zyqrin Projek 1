@@ -10,7 +10,7 @@ local Window = WindUI:CreateWindow({
 
     Size = UDim2.fromOffset(580, 460),
     Transparent = true,
-    Theme = "Dark Blue",
+    Theme = "Dark blue",
 
     User = {
         Enabled = true,
