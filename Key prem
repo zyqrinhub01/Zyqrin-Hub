@@ -1,26 +1,82 @@
+-- =========================
+-- LOADER KEY SYSTEM
+-- =========================
+
 local Players = game:GetService("Players")
+local HttpService = game:GetService("HttpService")
 local lp = Players.LocalPlayer
 
--- DATABASE KEY (BUATAN KAMU)
+-- =========================
+-- DATABASE KEY → USERID
+-- =========================
 local Keys = {
-    [123456789] = "Yosbt68iayg7", -- UserId : Key
-    [987654321] = "ABCD-9999",
-    [555666777] = "FTGS-PRIVATE"
+    ["Yosbt68iayg7"] = 4589123456, -- GANTI DENGAN USERID KAMU
+    ["ABCD-9999"]   = 123456789,
 }
 
--- cek apakah user terdaftar
-local correct_key = Keys[lp.UserId]
-
-if not correct_key then
-    lp:Kick("Akun tidak terdaftar")
+-- =========================
+-- CEK KEY ADA ATAU TIDAK
+-- =========================
+if not script_key then
+    lp:Kick("Key tidak ditemukan")
     return
 end
 
--- cek key
-if script_key ~= correct_key then
-    lp:Kick("Key salah untuk akun ini")
+local allowedUserId = Keys[script_key]
+
+if not allowedUserId then
+    lp:Kick("Key tidak terdaftar")
     return
 end
 
--- LOLOS → EXECUTE
-loadstring(game:HttpGet("https://raw.githubusercontent.com/zyqrinhub01/Zyqrin-Hub/refs/heads/main/Zyqrin%20Projek%201"))()
+-- =========================
+-- CEK USER SESUAI ATAU TIDAK
+-- =========================
+if lp.UserId ~= allowedUserId then
+    lp:Kick("Key ini bukan untuk akun kamu")
+    return
+end
+
+-- =========================
+-- DETEKSI LOGIN (LOG)
+-- =========================
+print("===== KEY LOGIN DETECTED =====")
+print("Username:", lp.Name)
+print("UserId:", lp.UserId)
+print("Key:", script_key)
+print("Time:", os.date("%d-%m-%Y %H:%M:%S"))
+
+-- =========================
+-- OPTIONAL: DISCORD WEBHOOK
+-- =========================
+-- isi webhook kalau mau, kalau tidak hapus bagian ini
+local WEBHOOK_URL = "" -- contoh: https://discord.com/api/webhooks/....
+
+if WEBHOOK_URL ~= "" then
+    local data = {
+        embeds = {{
+            title = "🔑 KEY LOGIN DETECTED",
+            color = 65280,
+            fields = {
+                { name = "Username", value = lp.Name, inline = true },
+                { name = "UserId", value = tostring(lp.UserId), inline = true },
+                { name = "Key", value = script_key, inline = false },
+                { name = "Time", value = os.date("%d-%m-%Y %H:%M:%S"), inline = false }
+            }
+        }}
+    }
+
+    pcall(function()
+        HttpService:PostAsync(
+            WEBHOOK_URL,
+            HttpService:JSONEncode(data)
+        )
+    end)
+end
+
+-- =========================
+-- LOLOS → LOAD SCRIPT UTAMA
+-- =========================
+loadstring(game:HttpGet(
+    "https://raw.githubusercontent.com/USERNAME/REPO/main/main.luau"
+))()
