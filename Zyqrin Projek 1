@@ -20,7 +20,7 @@ local Window = WindUI:CreateWindow({
 
 local InfoTab = Window:Tab({
     Title = "Tab Title",
-    Icon = "geist:information", -- optional
+    Icon = "lucide:information", -- optional
     Locked = false,
 })
 
@@ -32,7 +32,7 @@ local Paragraph = InfoTab:Paragraph({
     Color = "Blue",
     Buttons = {
         {
-            Icon = "geist:copy",
+            Icon = "lucide:copy",
             Title = "Join Discord",
             Callback = function()
                 if setclipboard then
