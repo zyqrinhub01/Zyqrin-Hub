@@ -10,7 +10,7 @@ local Window = WindUI:CreateWindow({
         API = {                                                     
             { -- pandadevelopment
                 Type = "pandadevelopment", -- type
-                ServiceId = "Zyqrin Hub", -- service id
+                ServiceId = "zyqrin", -- service id
             },                                                      
         },                                                          
     },                                                              
