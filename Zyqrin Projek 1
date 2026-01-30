@@ -23,24 +23,13 @@ local InfoTab = Window:Tab({
     Icon = "bird", -- optional
     Locked = false,
 })
+
 local discordInvite = "https://discord.gg/INVITE_KAMU"
 
 local Paragraph = InfoTab:Paragraph({
-    Title = "Paragraph with Image, Thumbnail, Buttons",
-    Desc = "Script ini memiliki fitur:
-• Auto Farm
-• Auto Collect
-• Auto Buy
-• Auto Rejoin
-
-Catatan:
-- Jangan pakai di akun utama
-- Jika error, rejoin server
-- Update otomatis tanpa ganti link
-
-Discord:
-discord.gg/INVITEKAMU",
-    Color = "Red",
+    Title = "ZYQRIN DISCORD",
+    Desc = "Join Discord untuk info & update script",
+    Color = "Blue",
     Buttons = {
         {
             Icon = "bird",
