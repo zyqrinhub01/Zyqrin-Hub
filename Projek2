@@ -46,7 +46,7 @@ _G.PilihBlox = "Basic Block"
 --Functions
 function AutoHit()
  while _G.AutoHit == true do
-game:GetService("ReplicatedStorage").Remotes.DamageBlockEvent:FireServer(_G.PilihBlox, --[[ PARENTED TO NIL OR DESTROYED ]])
+game:GetService("ReplicatedStorage").Remotes.DamageBlockEvent:FireServer(_G.PilihBlox,5)
     end
 end
 
