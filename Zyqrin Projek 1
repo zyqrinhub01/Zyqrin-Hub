@@ -18,6 +18,26 @@ local Window = WindUI:CreateWindow({
     }
 })
 
+local Dialog = Window:Dialog({
+    Icon = "bird",
+    Title = "Dialog Title",
+    Content = "Content Text",
+    Buttons = {
+        {
+            Title = "Confirm",
+            Callback = function()
+                print("Confirmed!")
+            end,
+        },
+        {
+            Title = "Cancel",
+            Callback = function()
+                print("Cancelled!")
+            end,
+        },
+    },
+})
+
 local Tab = Window:Tab({
     Title = "Tab Title",
     Icon = "bird", -- optional
