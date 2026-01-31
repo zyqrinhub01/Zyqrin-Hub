@@ -19,7 +19,7 @@ local Net = RS.Packages._Index["sleitnick_net@0.2.0"].net
 
 local AutoFishing = false
 local PullDelay = 0.5
-local ResetDelay = 0.3
+local ResetDelay = 0
 
 -- ===== INPUT BOXES =====
 local PullInput = Tab:Input({
